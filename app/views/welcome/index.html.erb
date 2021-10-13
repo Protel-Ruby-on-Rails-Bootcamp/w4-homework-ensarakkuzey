@@ -1,2 +1,15 @@
 <h1>Welcome viBlog</h1>
 <hr />
+
+<% if user_signed_in? %>
+    <ul>
+        <% @posts.each do |post| %>
+            <li>
+                <strong><%= post.title %></strong> created by <strong><%= post.user.username%></strong> at <%= post.created_at.strftime("%e.%m.%Y, %H:%M") %>
+            </li>
+        <% end %>
+    </ul>
+<% else %>
+    <p>Sisteme kayıt olarak blogunuzu yönetebilirsiniz.</p>
+<% end %>
+
