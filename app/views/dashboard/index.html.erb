@@ -1,15 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<h1>My Posts</h1>
+<h1><%= current_user.username %>'s Dashboard</h1>
+<hr />
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
-      <th>Content</th>
       <th>Date</th>
-      <th>Visible</th>
-      <th colspan="3"></th>
+      <th>Visible?</th>
+      <th colspan="4"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -17,17 +16,15 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.title %></td>
-        <td><%= post.content %></td>
         <td><%= post.created_at.strftime("%e.%m.%Y, %H:%M") %></td>
         <td><%= post.visible %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "#{post.comments.count} Comments", post_comments_path(post) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Post ✍️', new_post_path %>

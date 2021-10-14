@@ -1,0 +1,17 @@
+<h1><%= @post.title %> Comments</h1>
+
+<% if @comments.any? %>
+  <ul>
+    <% @comments.each do |comment| %>
+      <% if comment.status == 'Private' %>
+        <li><strong><%= comment.commentter %></strong> wrote a comment to your <strong><%= @post.title %></strong> post. <strong><%= link_to 'Click', post_comment_path(@post, comment) %></strong> here to accept it.</li>
+      <% else %>
+        <li><strong><%= comment.commentter %></strong> wrote a comment to your <strong><%= @post.title %></strong> post. You have accepted it.</li>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There is no comment</p>
+<% end %>
+
+<%= link_to 'Back', dashboard_path %>

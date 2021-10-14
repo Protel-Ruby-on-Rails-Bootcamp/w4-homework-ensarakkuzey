@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     if current_user
-      @posts =  Post.availables.or(current_user.posts)
+      @posts =  Post.availables.order(created_at: :desc)
     end
   end
 end

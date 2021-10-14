@@ -1,19 +1,46 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<h3>
   <%= @post.title %>
-</p>
+</h3>
 
 <p>
-  <strong>Content:</strong>
   <%= @post.content %>
 </p>
 
-<p>
-  <strong>Visible:</strong>
-  <%= @post.visible %>
-</p>
+<hr />
+
+<h1>Comments</h1>
+
+<% if @comments.any? %>
+  <% @post.comments.each do |comment| %>
+    <p><strong><%= comment.title %></strong>
+    <br/>
+    <%= comment.content %></p>
+    <hr>
+  <% end %>
+<% else %>
+  <p>There is no comment</p>
+<% end %>
+
+<% unless @post.user == current_user %>
+  <h2>Add a comment</h2>
+
+  <%= form_with model: [@post, @post.comments.build] do |form| %>
+    <p>
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </p>
+    <p>
+      <%= form.label :content %>
+      <%= form.text_area :content %>
+    </p>
+
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
+<% end %>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
