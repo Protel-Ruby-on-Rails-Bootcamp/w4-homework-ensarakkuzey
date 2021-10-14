@@ -1,5 +1,7 @@
 class WelcomeController < ApplicationController
   def index
-    @posts =  Post.availables
+    if current_user
+      @posts =  Post.availables.or(current_user.posts)
+    end
   end
 end
