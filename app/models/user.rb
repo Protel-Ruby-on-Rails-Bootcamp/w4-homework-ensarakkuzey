@@ -14,9 +14,7 @@ class User < ApplicationRecord
   attr_writer :login
 
   def validate_username
-    if User.where(email: username).exists?
-      errors.add(:username, :invalid)
-    end
+    self.errors.add(:username, :invalid) if User.where(email: username).exists?
   end
 
   def login

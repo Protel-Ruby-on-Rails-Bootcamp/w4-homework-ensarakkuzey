@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def index
     @post = Post.find(params[:post_id])
-    @comments = @post.comments
+    @comments = @post.comments.order(created_at: :desc)
   end
 
   def show
@@ -12,8 +12,19 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.create(comment_params)
-    @comment.update!(user: current_user)
-    redirect_to @post
+    @comment.user = current_user
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @post, notice: "Comment was successfully created." }
+        format.json { render :show, status: :created, location: @post }
+      else
+        
+        format.html { redirect_to @post, notice: flash[:danger] = 'Comment title or content can\'t be blank.' }
+        format.json { render :show, status: :unprocessable_entity, location: @post}
+      end
+    end
+
   end
 
   def accept

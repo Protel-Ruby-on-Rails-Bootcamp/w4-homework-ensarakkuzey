@@ -13,7 +13,7 @@
 <h1>Comments</h1>
 
 <% if @comments.any? %>
-  <% @post.comments.each do |comment| %>
+  <% @comments.each do |comment| %>
     <p><strong><%= comment.title %></strong>
     <br/>
     <%= comment.content %></p>
