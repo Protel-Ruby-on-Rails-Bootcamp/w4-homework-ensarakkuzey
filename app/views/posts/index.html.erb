@@ -18,7 +18,7 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
-        <td><%= post.created_at.strftime("%e.%m.%Y, %H:%M") %></td>
+        <td><%= post.created_at.in_time_zone("Istanbul").strftime("%e.%m.%Y, %H:%M") %></td>
         <td><%= post.visible %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>

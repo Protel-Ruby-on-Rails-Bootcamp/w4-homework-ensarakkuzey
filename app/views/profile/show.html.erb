@@ -1,0 +1,20 @@
+
+<hr/>
+<h1><%= @user.username %>'s Profile</h1>
+<p>
+    Username : <%= @user.username%> 
+    <br/>
+    Email : <%= @user.email%>
+</p>
+
+<h3>Posts</h3>
+
+<% if @posts.any? %>
+  <ul>
+    <% @posts.each do |post| %>
+     <li><strong><%= link_to post.title, post_path(post) %></strong> created by <strong><%= @user.username %></strong> at <%= post.created_at.in_time_zone("Istanbul").strftime("%e.%m.%Y, %H:%M") %>.</li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There is no post</p>
+<% end %>

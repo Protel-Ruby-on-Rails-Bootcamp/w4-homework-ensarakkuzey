@@ -4,27 +4,26 @@
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Visible?</th>
-      <th colspan="4"></th>
+      <th colspan=""></th>
       <th></th>
     </tr>
   </thead>
 
   <tbody>
+  <% if @posts.any?%>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.title %></td>
-        <td><%= post.created_at.strftime("%e.%m.%Y, %H:%M") %></td>
+        <td><strong><%= post.title %></strong></td>
+        <td><%= post.created_at.in_time_zone("Istanbul").strftime("%e.%m.%Y, %H:%M") %></td>
         <td><%= post.visible %></td>
+        <td><%= link_to "#{post.comments.count} Comments", post_comments_path(post) %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to "#{post.comments.count} Comments", post_comments_path(post) %></td>
       </tr>
     <% end %>
+  <% else %>
+    <p>You have not sent a post yet. </p>
+  <% end %>
   </tbody>
 </table>
-
-<%= link_to 'New Post ✍️', new_post_path %>

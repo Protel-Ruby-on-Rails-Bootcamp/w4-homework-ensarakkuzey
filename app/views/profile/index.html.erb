@@ -1,0 +1,12 @@
+<h1>User List</h1>
+<hr />
+
+<% if @users.any? %>
+  <ol>
+    <% @users.each do |user| %>
+     <li><strong><%= link_to user.username, profile_path(user.id) %></strong>, <%= "#{user.posts.availables.count} Posts" %></li>
+    <% end %>
+  </ol>
+<% else %>
+  <p>There is no user</p>
+<% end %>

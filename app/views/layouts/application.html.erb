@@ -14,10 +14,11 @@
 
 
     <p>
-    <%= link_to '🏠', root_path %>
+    <%= link_to '🏠 Homepage ', root_path %> | 
     <% if user_signed_in? %>
-      <%= link_to '🧑', dashboard_path %>
-      <%= link_to '✍', new_post_path %>
+      <%= link_to '👨‍💻 User List', profile_index_path %> | 
+      <%= link_to '🧑 Dashboard', dashboard_path %> | 
+      <%= link_to '✍ New Post', new_post_path %>
       <p>
         Welcome <strong><%= current_user.username %></strong> | 
         <%= link_to 'Edit profile', edit_user_registration_path %> |

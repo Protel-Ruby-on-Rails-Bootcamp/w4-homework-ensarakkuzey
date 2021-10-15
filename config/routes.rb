@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'
+  # get 'profile/index/:user_id', to: 'proile#index', as: 'profile'
 
   devise_for :users
+  resources :profile
   resources :posts do
     resources :comments do
       patch :accept, on: :member
