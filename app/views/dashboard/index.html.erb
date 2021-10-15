@@ -4,6 +4,9 @@
 <table>
   <thead>
     <tr>
+      <th>Title</th>
+      <th>Date</th>
+      <th>Visible?</th>
       <th colspan=""></th>
       <th></th>
     </tr>
@@ -13,7 +16,7 @@
   <% if @posts.any?%>
     <% @posts.each do |post| %>
       <tr>
-        <td><strong><%= post.title %></strong></td>
+        <td><%= post.title %></td>
         <td><%= post.created_at.in_time_zone("Istanbul").strftime("%e.%m.%Y, %H:%M") %></td>
         <td><%= post.visible %></td>
         <td><%= link_to "#{post.comments.count} Comments", post_comments_path(post) %></td>
