@@ -1,0 +1,2 @@
+$('#follow_form').html("<%= escape_javascript(render('profile/unfollow')) %>")
+$('#follow_info').html("<strong>Following (<%= @user.following.count %>)</strong> | <strong>Followers (<%= @user.followers.count %>)</strong>")

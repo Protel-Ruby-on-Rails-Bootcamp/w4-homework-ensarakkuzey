@@ -7,8 +7,10 @@
     Email : <%= @user.email%>
 </p>
 
-<strong>Following (<%= @user.following.count %>)</strong> | 
-<strong>Followers (<%= @user.followers.count %>)</strong>
+<div id='follow_info'>
+  <strong>Following (<%= @user.following.count %>)</strong> | 
+  <strong>Followers (<%= @user.followers.count %>)</strong>
+</div>
 
 <% if user_signed_in? && @user != current_user %>
   <p><%= render 'follow_form' %></p>

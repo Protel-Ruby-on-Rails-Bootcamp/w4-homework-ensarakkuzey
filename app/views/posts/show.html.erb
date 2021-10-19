@@ -15,8 +15,12 @@
 <% if @comments.any? %>
   <% @comments.each do |comment| %>
     <p><strong><%= comment.title %></strong> - <strong><%= link_to comment.user.username, profile_path(comment.user)%></strong>
+    <% unless comment.accepted? %>
+      <em> - Comment Status : Waiting</em>
+    <% end %>
     <br/>
     <%= comment.content %></p>
+
     <hr>
   <% end %>
 <% else %>

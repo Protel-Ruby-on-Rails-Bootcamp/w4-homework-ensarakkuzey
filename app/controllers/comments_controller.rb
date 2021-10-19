@@ -19,7 +19,6 @@ class CommentsController < ApplicationController
         format.html { redirect_to @post, notice: "Comment was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
-        
         format.html { redirect_to @post, notice: flash[:danger] = 'Comment title or content can\'t be blank.' }
         format.json { render :show, status: :unprocessable_entity, location: @post}
       end
