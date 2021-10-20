@@ -10,7 +10,9 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    @comments = @post.comments.accepteds.or(current_user.comments)
+    @comments = @post.comments.accepteds
+    @user = current_user
+    @user_comments = @post.comments.where({user_id: @user.id, accepted: false}).order(created_at: :desc) 
   end
 
   # GET /posts/new

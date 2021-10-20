@@ -27,3 +27,17 @@
 <% else %>
   <p>There is no post</p>
 <% end %>
+
+<hr/>
+
+<h3>Comments</h3>
+
+<% if @comments.any? %>
+  <ul>
+    <% @comments.each do |comment| %>
+     <li><%= @user.username %> wrote <strong><%= link_to comment.title, post_path(comment.post) %></strong> comment to <strong><%= link_to comment.post.title, post_path(comment.post) %></strong> at <%= comment.created_at.in_time_zone("Istanbul").strftime("%e.%m.%Y, %H:%M") %>.</li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There is no post</p>
+<% end %>

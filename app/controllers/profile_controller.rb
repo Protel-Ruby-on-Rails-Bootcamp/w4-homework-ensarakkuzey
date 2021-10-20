@@ -8,5 +8,6 @@ class ProfileController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.availables.order(created_at: :desc)
+    @comments = @user.comments.accepteds.order(created_at: :desc)  
   end
 end

@@ -14,13 +14,19 @@ class CommentsController < ApplicationController
     @comment = @post.comments.create(comment_params)
     @comment.user = current_user
 
+    @user = current_user
+    @user_comments = @post.comments.where({user_id: @user.id, accepted: false}).order(created_at: :desc) 
+    @comments = @post.comments.accepteds
+
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @post, notice: "Comment was successfully created." }
-        format.json { render :show, status: :created, location: @post }
+        format.js
+        # format.json { render :show, status: :created, location: @post }
       else
         format.html { redirect_to @post, notice: flash[:danger] = 'Comment title or content can\'t be blank.' }
-        format.json { render :show, status: :unprocessable_entity, location: @post}
+        format.js
+        # format.json { render :show, status: :unprocessable_entity, location: @post}
       end
     end
 
