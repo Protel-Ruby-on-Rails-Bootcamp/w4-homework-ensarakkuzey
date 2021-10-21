@@ -2,4 +2,8 @@
 <p><%= @comment.content %></p>
 <p><b>Written by <%= @comment.commentter %></b></p>
 
-<%= link_to 'Accept', accept_post_comment_path(@comment.post, @comment), method: :patch %>
+<% unless @comment.accepted? %>
+    <%= link_to 'Accept this comment', accept_post_comment_path(@comment.post, @comment), method: :patch %>
+<% else %>
+    <%= link_to 'Deny this comment', deny_post_comment_path(@comment.post, @comment), method: :patch %>
+<% end %>

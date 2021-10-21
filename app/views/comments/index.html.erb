@@ -3,10 +3,10 @@
 <% if @comments.any? %>
   <ul>
     <% @comments.each do |comment| %>
-      <% if comment.status == 'Private' %>
-        <li><strong><%= comment.commentter %></strong> wrote a comment to your <strong><%= @post.title %></strong> post. <strong><%= link_to 'Click', post_comment_path(@post, comment) %></strong> here to accept it.</li>
+      <% if comment.status == 'NotExpired' %>
+        <li><strong><%= comment.commentter %></strong> wrote a comment to your <strong><%= @post.title %></strong> post. <strong><%= link_to 'Click', post_comment_path(@post, comment) %></strong> here to manage it.</li>
       <% else %>
-        <li><strong><%= comment.commentter %></strong> wrote a comment to your <strong><%= @post.title %></strong> post. You have accepted it.</li>
+        <li><strong><%= comment.commentter %></strong> wrote a comment to your <strong><%= @post.title %></strong> post. This comment is expired. Not manageable.</li>
       <% end %>
     <% end %>
   </ul>

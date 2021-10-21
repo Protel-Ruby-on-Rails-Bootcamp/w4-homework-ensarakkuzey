@@ -5,17 +5,17 @@ class Comment < ApplicationRecord
     belongs_to :post
     belongs_to :user
 
-    scope :accepteds, -> { where(accepted: true) }
+    scope :accepteds, -> { where("accepted = ? OR (expire_date <= ? AND action = ?)", true, DateTime.now, false) }
 
     def commentter
         self.user ? user.username : ''
     end
 
     def status
-        if accepted
-            'Public'
+        if DateTime.now >= expire_date
+          'Expired'
         else
-            'Private'
+          'NotExpired'
         end
-    end
+      end
 end

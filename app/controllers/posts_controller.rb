@@ -68,6 +68,26 @@ class PostsController < ApplicationController
     end
   end
 
+  def vote_up
+    @post = Post.find(params[:id])
+    @post.update!(vote_count: @post.vote_count + 1)
+
+    respond_to do |format|
+        format.html { redirect_to @post }
+        format.js
+    end
+  end
+
+  def vote_down
+    @post = Post.find(params[:id])
+    @post.update!(vote_count: @post.vote_count - 1)
+
+    respond_to do |format|
+      format.html { redirect_to @post }
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post

@@ -1,19 +1,19 @@
 <div id='comments_field'>
     <% if @user_comments.any? %>
         <% @user_comments.each do |user_comment| %>
-            <p><strong><%= user_comment.title %></strong> - <strong><%= link_to user_comment.user.username, profile_path(user_comment.user)%></strong> - <em>Comment Status : Waiting</em>
-            <br/>
-            <%= user_comment.content %></p>
-            <hr>
+            <%  if user_comment.accepted != true && user_comment.expire_date >  DateTime.now %>
+                <p><strong><%= user_comment.title %></strong> - <strong><%= link_to user_comment.user.username, profile_path(user_comment.user)%></strong> - <em>Comment Status : Waiting</em>
+                <br/>
+                <%= user_comment.content %></p>
+                <hr>
+            <% end %>
         <% end %>
     <% end %>
 
     <% if @comments.any? %>
     <% @comments.each do |comment| %>
         <p><strong><%= comment.title %></strong> - <strong><%= link_to comment.user.username, profile_path(comment.user)%></strong>
-        <% unless comment.accepted? %>
-        <em> - Comment Status : Waiting</em>
-        <% end %>
+
         <br/>
         <%= comment.content %></p>
         <hr>

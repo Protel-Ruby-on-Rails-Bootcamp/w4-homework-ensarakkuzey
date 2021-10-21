@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments do
       patch :accept, on: :member
+      patch :deny, on: :member
     end
+    patch :vote_up, on: :member
+    patch :vote_down, on: :member
   end
 
   resources :relationships, only: [:create, :destroy] 

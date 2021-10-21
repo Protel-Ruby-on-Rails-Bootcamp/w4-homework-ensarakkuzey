@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.create(comment_params)
+    @comment.expire_date = DateTime.now + 2.days
     @comment.user = current_user
 
     @user = current_user
@@ -35,7 +36,14 @@ class CommentsController < ApplicationController
   def accept
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
-    @comment.update!(accepted: true)
+    @comment.update!(accepted: true, action: true)
+    redirect_to post_comments_path
+  end
+
+  def deny
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
+    @comment.update!(accepted: false)
     redirect_to post_comments_path
   end
 
