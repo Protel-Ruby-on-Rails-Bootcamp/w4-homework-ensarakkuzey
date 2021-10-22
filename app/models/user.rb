@@ -17,6 +17,10 @@ class User < ApplicationRecord
   validates :username, presence: true, length: { minimum: 5, maximum: 50 }
   validate :validate_username
 
+  def feed
+    Post.where("user_id IN (?)", following_ids).availables
+  end
+
   def follow(other_user)
     following << other_user unless self == other_user
   end

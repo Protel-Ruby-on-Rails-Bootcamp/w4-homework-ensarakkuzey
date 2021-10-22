@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'feed', to: 'feed#index', as: 'feed'
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'
   # get 'profile/index/:user_id', to: 'proile#index', as: 'profile'
 
@@ -9,8 +10,7 @@ Rails.application.routes.draw do
       patch :accept, on: :member
       patch :deny, on: :member
     end
-    patch :vote_up, on: :member
-    patch :vote_down, on: :member
+    patch :vote_control, on: :member
   end
 
   resources :relationships, only: [:create, :destroy] 

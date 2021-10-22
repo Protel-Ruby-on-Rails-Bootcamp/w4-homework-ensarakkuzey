@@ -9,11 +9,11 @@
 </p>
 
 <div id='vote_field'>
-    <p><strong>Vote : <%= @post.vote_count %></strong></p>
+    <p>
+      <strong>Vote : <%= @post.vote_count %></strong> ( <%= link_to '👍', vote_control_post_path(@post, :vote_type => 'Vote_Up'), method: :patch %> | 
+                                                        <%= link_to '👎', vote_control_post_path(@post, :vote_type => 'Vote_Down'), method: :patch %> )
+    </p>
 </div>
-
-( <%= link_to '👍', vote_up_post_path(@post), method: :patch %> | <%= link_to '👎', vote_down_post_path(@post), method: :patch %> )
-
 <hr />
 
 <h1>Comments</h1>

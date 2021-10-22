@@ -68,23 +68,18 @@ class PostsController < ApplicationController
     end
   end
 
-  def vote_up
+  def vote_control
     @post = Post.find(params[:id])
-    @post.update!(vote_count: @post.vote_count + 1)
+    
+    vote_type = params[:vote_type]
+    if vote_type == 'Vote_Up'
+      @post.update!(vote_count: @post.vote_count + 1)
+    else
+      @post.update!(vote_count: @post.vote_count - 1)
+    end
 
     respond_to do |format|
         format.html { redirect_to @post }
-        format.js
-    end
-  end
-
-  def vote_down
-    @post = Post.find(params[:id])
-    @post.update!(vote_count: @post.vote_count - 1)
-
-    respond_to do |format|
-      format.html { redirect_to @post }
-      format.js
     end
   end
 

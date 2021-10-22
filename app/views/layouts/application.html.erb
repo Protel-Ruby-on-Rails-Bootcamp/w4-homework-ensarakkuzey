@@ -17,6 +17,7 @@
     <%= link_to '🏠 Homepage ', root_path %> | 
     <% if user_signed_in? %>
       <%= link_to '👨‍💻 User List', profile_index_path %> | 
+      <%= link_to '🌐 My Feed', feed_path %> | 
       <%= link_to '🧑 Dashboard', dashboard_path %> | 
       <%= link_to '✍ New Post', new_post_path %>
       <p>

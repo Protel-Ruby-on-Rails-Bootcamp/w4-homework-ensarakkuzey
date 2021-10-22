@@ -2,17 +2,13 @@
 <hr />
 
 <% if user_signed_in? %>
-    <% if @posts.any? %>
-        <ul>
-            <% @posts.each do |post| %>
-                <li>
-                    <strong><%= link_to post.title, post_path(post) %></strong> created by <strong><%= link_to post.user.username, profile_path(post.user)%></strong> at <%= post.created_at.in_time_zone("Istanbul").strftime("%e.%m.%Y, %H:%M") %>
-                </li>
-            <% end %>
-        </ul>
+    <h2>HELLO!</h2>
+    <% if current_user.following.count > 0 %>
+        <p><%= link_to 'Click here', new_post_path %> to create a post or view your <%= link_to 'feed', feed_path %></p>
     <% else %>
-        <p>There is no post yet. Would you like to send the first post? <%= link_to "Click Here!", new_post_path%></p>
+
     <% end %>
+
 <% else %>
     <p>You can manage your blog by sign in the system.</p>
 <% end %>

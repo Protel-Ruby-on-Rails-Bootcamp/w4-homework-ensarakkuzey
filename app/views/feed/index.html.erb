@@ -1,0 +1,23 @@
+<h1>Feed</h1>
+<hr />
+
+<% if user_signed_in? %>
+    <% if @posts.any? %>
+        <ul>
+            <% @posts.each do |post| %>
+                <div>
+                    <h3><%= link_to post.title, post_path(post) %></h3>
+                    <p>
+                        <%= post.content.truncate(250) %> <%= link_to 'Read More', post_path(post) %> 
+                        <br/> <br/> 
+                        Created by <strong><%= link_to post.user.username, profile_path(post.user)%></strong> at <%= post.created_at.in_time_zone("Istanbul").strftime("%e.%m.%Y, %H:%M") %>
+                    </p>
+                </div>
+                <hr/>
+            <% end %>
+        </ul>
+    <% else %>
+        <p>There is no post yet. Want to follow someone to update your feed? <%= link_to "Click Here!", profile_index_path%></p>
+    <% end %>
+<% end %>
+
