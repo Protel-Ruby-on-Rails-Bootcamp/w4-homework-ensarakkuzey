@@ -1,3 +1,62 @@
+<div class="col-12">
+  <div class="row">
+    <div class="col-md-3 col-xs-12 user-box">
+      <div class="row">
+        <div class="col-12 user-avatar">
+          <%= image_tag @user.gravatar_url, :class => "gravatar-profile" %>
+        </div>
+        <div class="col-12 user-info mt-2">
+          <div class="row">
+            <div class="col-12">
+              <span><strong><%= @user.username%></strong></span>
+            </div>
+            <div class="col-12 mt-2">
+              <div class="col-12" id='follow_info'>
+                <strong>Followers (<%= @user.followers.count %>) - Following (<%= @user.following.count %>)</strong>
+              </div>
+              <br>
+              <% if current_user != @user%>
+                <span><%= render 'follow_form' %></span>
+              <% end %>
+            </div>
+            <div class="col-12 user-bio mt-2">
+              <span>Back-end developer. Ruby on Rails geliştiricisi. Fantastik eserlere ilgi duyuyor.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-9 col-xs-12">
+      <div class="col-12 flex-header">
+        <h4>Last 5 Posts</h4>
+        <div class="line"></div>
+      </div>
+      <% if @posts.any? %>
+          <ul>
+              <% @posts.first(5).each do |post| %>
+                  <div class="col-12 mb-4 post-box">
+                      <div class="row">
+                          <div class="col-12 post-area mt-2">
+                              <h5><%= link_to post.title, post_path(post) %></h5>
+                              <span><%= post.content.truncate(250) %> <strong><%= link_to 'Read More', post_path(post) %></strong></span>
+                          </div>
+                          <div class="col-12 post-info mt-1">
+                              <%= post.created_at.in_time_zone("Istanbul").strftime("%b %d, %Y") %> - <%=pluralize(post.reading_time, 'min read')%>
+                          </div>
+                      </div>
+                  </div>
+              <% end %>
+          </ul>
+      <% else %>
+          <p>There is no post yet.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
 
 <hr/>
 <h1><%= @user.username %>'s Profile</h1>
@@ -6,30 +65,7 @@
     <br/>
     Email : <%= @user.email%>
 </p>
-
-<div id='follow_info'>
-  <strong>Following (<%= @user.following.count %>)</strong> | 
-  <strong>Followers (<%= @user.followers.count %>)</strong>
-</div>
-
-<% if user_signed_in? && @user != current_user %>
-  <p><%= render 'follow_form' %></p>
-<% end %>
-
-<h3>Posts</h3>
-
-<% if @posts.any? %>
-  <ul>
-    <% @posts.each do |post| %>
-     <li><strong><%= link_to post.title, post_path(post) %></strong> created by <strong><%= @user.username %></strong> at <%= post.created_at.in_time_zone("Istanbul").strftime("%e.%m.%Y, %H:%M") %>.</li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>There is no post</p>
-<% end %>
-
-<hr/>
-
+  
 <h3>Comments</h3>
 
 <% if @comments.any? %>

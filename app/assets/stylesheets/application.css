@@ -13,3 +13,54 @@
  *= require_tree .
  *= require_self
  */
+
+
+.gravatar {
+    height: 30px;
+    width: auto;
+}
+
+.gravatar-post {
+    height: 30px;
+    width: auto;
+    border-radius: 50%;
+}
+
+.gravatar-profile {
+    height: 100px;
+    width: auto;
+    border-radius: 50%;
+}
+
+
+/* Profile Page */
+.user-box {
+    text-align: center;
+}
+
+.post-info {
+    color:rgb(151, 151, 151);
+}
+
+/* Helpers */
+.profile-list{
+    margin-top: 5px;
+}
+
+.btn-radius {
+    font-size: small;
+    border-radius: 30px;
+}
+
+.flex-header {
+    display: flex;
+}
+
+.line {
+    display: flex;
+    flex-grow: 1;
+    height: 1px;
+    align-self: center;
+    margin: 0 20px;
+    background-color: grey;
+}

@@ -1,23 +1,31 @@
-<h1>Feed</h1>
-<hr />
-
-<% if user_signed_in? %>
+<div class="col-md-9 col-xs-12">
+    <h2>Your Feed</h2>
+    <hr />
     <% if @posts.any? %>
         <ul>
             <% @posts.each do |post| %>
-                <div>
-                    <h3><%= link_to post.title, post_path(post) %></h3>
-                    <p>
-                        <%= post.content.truncate(250) %> <%= link_to 'Read More', post_path(post) %> 
-                        <br/> <br/> 
-                        Created by <strong><%= link_to post.user.username, profile_path(post.user)%></strong> at <%= post.created_at.in_time_zone("Istanbul").strftime("%e.%m.%Y, %H:%M") %>
-                    </p>
+                <div class="col-12 mt-4 post-box">
+                    <div class="row">
+                        <div class="col-12 user-area">
+                        <%= image_tag post.user.gravatar_url, :class => "gravatar-post" %>
+                        <strong><%= link_to post.user.username, profile_path(post.user)%></strong>
+                        </div>
+                        <div class="col-12 post-area mt-2">
+                            <h5><%= link_to post.title, post_path(post) %></h5>
+                            <span><%= post.content.truncate(250) %> <strong><%= link_to 'Read More', post_path(post) %></strong></span>
+                        </div>
+                        <div class="col-12 post-info mt-1">
+                            <%= post.created_at.in_time_zone("Istanbul").strftime("%b %d, %Y") %> - <%=pluralize(post.reading_time, 'min read')%>
+                        </div>
+                    </div>
                 </div>
-                <hr/>
             <% end %>
         </ul>
     <% else %>
         <p>There is no post yet. Want to follow someone to update your feed? <%= link_to "Click Here!", profile_index_path%></p>
     <% end %>
-<% end %>
+</div>
+<div class="col-md-3 col-xs-12">
+</div>
+
 

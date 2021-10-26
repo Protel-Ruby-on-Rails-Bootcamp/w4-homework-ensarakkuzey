@@ -3,6 +3,12 @@
   <head>
     <title>ViBlog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,28 +17,62 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <img src="https://i.hizliresim.com/gand1ha.png"  alt="">
 
+        </a>
 
-    <p>
-    <%= link_to '🏠 Homepage ', root_path %> | 
-    <% if user_signed_in? %>
-      <%= link_to '👨‍💻 User List', profile_index_path %> | 
-      <%= link_to '🌐 My Feed', feed_path %> | 
-      <%= link_to '🧑 Dashboard', dashboard_path %> | 
-      <%= link_to '✍ New Post', new_post_path %>
-      <p>
-        Welcome <strong><%= current_user.username %></strong> | 
-        <%= link_to 'Edit profile', edit_user_registration_path %> |
-        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-      </p>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path %> |
-      <%= link_to "Login", new_user_session_path %>
-    <% end %>
-    </p>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <%= link_to '🏠 Homepage ', root_path, class: "nav-link" %> 
+            </li>
+          </ul>
 
+          <ul class="navbar-nav">
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to '🌐 My Feed', feed_path, class: "nav-link" %> 
+              </li>
+              <li class="nav-item">
+                <%= link_to '👨‍💻 User List', profile_index_path, class: "nav-link" %> 
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= image_tag current_user.gravatar_url, :class => "gravatar" %>
+                  <%= current_user.username %>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <%= link_to '✍ New Post', new_post_path, class: "dropdown-item" %>
+                  <%= link_to '🧑 Dashboard', dashboard_path, class: "dropdown-item" %>
+                  <%= link_to '🌐 My Feed', feed_path, class: "dropdown-item" %>
+                  <%= link_to '🖲️ Edit profile', edit_user_registration_path, class: "dropdown-item" %>
+                  <div class="dropdown-divider"></div>
+                  <%= link_to "✖️ Logout", destroy_user_session_path, class: "dropdown-item", method: :delete %>
+                </div>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
 
-    <%= yield %>
+    <div class="container" style="margin-top:100px">
+      <%= yield %>
+    </div>
   </body>
 </html>
