@@ -1,6 +1,8 @@
 <div class="col-md-9 col-xs-12">
-    <h2>Your Feed</h2>
-    <hr />
+    <div class="col-12 flex-header">
+      <h4>Your Feed</h4>
+      <div class="line"></div>
+    </div>
     <% if @posts.any? %>
         <ul>
             <% @posts.each do |post| %>
@@ -25,7 +27,10 @@
         <p>There is no post yet. Want to follow someone to update your feed? <%= link_to "Click Here!", profile_index_path%></p>
     <% end %>
 </div>
+
+
 <div class="col-md-3 col-xs-12">
+    
 </div>
 
 

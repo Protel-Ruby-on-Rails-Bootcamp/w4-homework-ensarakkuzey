@@ -9,6 +9,10 @@
           <div class="row">
             <div class="col-12">
               <span><strong><%= @user.username%></strong></span>
+              <% if @user.name != nil && @user.name != '' %>
+                <br/>
+                <span><em><%= @user.name%></em></span>
+              <% end %>
             </div>
             <div class="col-12 mt-2">
               <div class="col-12" id='follow_info'>
@@ -18,14 +22,30 @@
               <% if current_user != @user%>
                 <span><%= render 'follow_form' %></span>
               <% end %>
+              <hr/>
             </div>
-            <div class="col-12 user-bio mt-2">
-              <span>Back-end developer. Ruby on Rails geliştiricisi. Fantastik eserlere ilgi duyuyor.</span>
+            <div class="col-12 user-bio">
+
+              <% if @user.bio != nil && @user.bio != '' %>
+                <span class="info-item"><%= @user.bio %></span>
+                <hr>
+              <%end%>
+
+              <% if @user.website != nil && @user.website != '' %>
+                <span class="info-item">🌐<%= @user.website %></span>
+              <%end%>
+
+              <% if @user.location != nil && @user.location != '' %>
+                <span class="info-item">🗺️<%= @user.location %></span>
+              <%end%>
+
             </div>
           </div>
         </div>
+
       </div>
     </div>
+
 
     <div class="col-md-9 col-xs-12">
       <div class="col-12 flex-header">
@@ -51,29 +71,35 @@
       <% else %>
           <p>There is no post yet.</p>
       <% end %>
+
+
+
+
+    <div class="col-12 flex-header">
+      <h4>Comments</h4>
+      <div class="line"></div>
+    </div>
+      <% if @comments.any? %>
+          <ul>
+              <% @comments.each do |comment| %>
+                  <div class="col-12 mb-2 post-box">
+                      <div class="row">
+                          <div class="col-12 post-area mt-2">
+                              <strong><%= link_to comment.title, post_path(comment.post) %></strong> to <strong><%= link_to comment.post.title, post_path(comment.post) %></strong>
+                              <br/> 
+                              <span><%= comment.content.truncate(250) %> <strong><%= link_to 'Look Post', post_path(comment.post) %></strong></span>
+                          </div>
+                          <div class="col-12 post-info mt-1">
+                              <%= comment.created_at.in_time_zone("Istanbul").strftime("%b %d, %Y") %>
+                          </div>
+                      </div>
+                  </div>
+              <% end %>
+          </ul>
+      <% else %>
+          <p>There is no comments.</p>
+      <% end %>
+
     </div>
   </div>
 </div>
-
-
-
-
-<hr/>
-<h1><%= @user.username %>'s Profile</h1>
-<p>
-    Username : <%= @user.username%> 
-    <br/>
-    Email : <%= @user.email%>
-</p>
-  
-<h3>Comments</h3>
-
-<% if @comments.any? %>
-  <ul>
-    <% @comments.each do |comment| %>
-     <li><%= @user.username %> wrote <strong><%= link_to comment.title, post_path(comment.post) %></strong> comment to <strong><%= link_to comment.post.title, post_path(comment.post) %></strong> at <%= comment.created_at.in_time_zone("Istanbul").strftime("%e.%m.%Y, %H:%M") %>.</li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>There is no post</p>
-<% end %>

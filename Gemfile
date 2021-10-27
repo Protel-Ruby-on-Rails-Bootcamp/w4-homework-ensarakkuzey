@@ -56,3 +56,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # New gems
 gem 'devise'
 gem 'gravtastic'
+gem 'social-share-button'

@@ -1,19 +1,37 @@
-<p id="notice"><%= notice %></p>
+<div class="col-12">
+  <div class="row">
 
-<h3>
-  <%= @post.title %>
-</h3>
+    <div class="col-12">
+      <h3><%= @post.title %></h3>
+    </div>
 
-<p>
-  <%= @post.content %>
-</p>
+    </div class="col-12">
+      <%= image_tag @post.user.gravatar_url, :class => "gravatar-post" %>
+      <strong><%= link_to @post.user.username, profile_path(@post.user)%></strong>
+      <%= @post.created_at.in_time_zone("Istanbul").strftime("%b %d, %Y") %> - <%=pluralize(@post.reading_time, 'min read')%>
+    </div>
 
-<div id='vote_field'>
-    <p>
-      <strong>Vote : <%= @post.vote_count %></strong> ( <%= link_to '👍', vote_control_post_path(@post, :vote_type => 'Vote_Up'), method: :patch %> | 
-                                                        <%= link_to '👎', vote_control_post_path(@post, :vote_type => 'Vote_Down'), method: :patch %> )
-    </p>
+    <div class="col-12 post-content">
+      <%= @post.content %>
+    </div>
+
+    <div class="col-12">
+      <div id='vote_field'>
+          <p>
+            <strong>Vote : <%= @post.vote_count %></strong> ( <%= link_to '👍', vote_control_post_path(@post, :vote_type => 'Vote_Up'), method: :patch %> | 
+                                                              <%= link_to '👎', vote_control_post_path(@post, :vote_type => 'Vote_Down'), method: :patch %> )
+          </p>
+      </div>
+      <div">
+        <%= social_share_button_tag(@post.title) %>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+
+
 <hr />
 
 <h1>Comments</h1>

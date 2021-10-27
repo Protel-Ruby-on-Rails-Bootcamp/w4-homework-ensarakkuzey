@@ -1,12 +1,39 @@
-<h1>User List</h1>
-<hr />
+<div class="col-12 flex-header">
+  <h4>User List</h4>
+  <div class="line"></div>
+</div>
 
 <% if @users.any? %>
-  <ol>
-    <% @users.each do |user| %>
-     <li><strong><%= link_to user.username, profile_path(user.id) %></strong>, <%= "#{user.posts.availables.count} Posts" %></li>
-    <% end %>
-  </ol>
+  <div class="col-12">
+    <div class="row card-columns">
+      <% @users.each do |user| %>
+          <div class="card p-3 col-md-2 col-xs-6 user-box">
+            <%= image_tag user.gravatar_url, :class => "gravatar-user" %>
+            <div class="card-body">
+              <h6 class="card-title"><%= link_to user.username, profile_path(user) %></h6>
+              <% if user.name != nil && user.name != ''%>
+                <em><%= user.name %></em>
+                <br>
+              <% end %>
+
+              <% if user.bio != nil && user.bio != ''%>
+              <hr/>
+                <p class="card-text"><%= user.bio%></p>
+              <% end %>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>Followers (<%= user.followers.count %>)</strong></li>
+              <li class="list-group-item"><strong>Following (<%= user.following.count %>)</strong></li>
+            </ul>
+            <div class="card-body">
+              <%= link_to 'Look Profile', profile_path(user), class: "btn btn-success btn-radius" %>
+            </div>
+          </div>
+
+      <% end %>
+
+    </div>
+  </div>
 <% else %>
   <p>There is no user</p>
 <% end %>
