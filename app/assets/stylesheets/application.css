@@ -12,9 +12,8 @@
  *
  *= require_tree .
  *= require_self
- #= require social-share-button
+ *= require social-share-button
  */
- @import "social-share-button";
 
 .gravatar {
     height: 30px;
@@ -57,9 +56,7 @@
 }
 
 .post-box {
-    border-radius: 10px;
-    padding: 20px;
-    background-color: rgb(250, 250, 250);
+
 }
 
 .post-info {
@@ -82,7 +79,7 @@
 /* Navbar */
 .navbar-custom {
     background-color: #3b4f79;
-    height: 100px;
+    height: 80px;
 }
 
 .navbar-light .nav-item .nav-link

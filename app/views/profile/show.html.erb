@@ -46,7 +46,6 @@
       </div>
     </div>
 
-
     <div class="col-md-9 col-xs-12">
       <div class="col-12 flex-header">
         <h4>Last 5 Posts</h4>
@@ -55,25 +54,28 @@
       <% if @posts.any? %>
           <ul>
               <% @posts.first(5).each do |post| %>
-                  <div class="col-12 mb-4 post-box">
-                      <div class="row">
-                          <div class="col-12 post-area mt-2">
-                              <h5><%= link_to post.title, post_path(post) %></h5>
-                              <span><%= post.content.truncate(250) %> <strong><%= link_to 'Read More', post_path(post) %></strong></span>
-                          </div>
-                          <div class="col-12 post-info mt-1">
-                              <%= post.created_at.in_time_zone("Istanbul").strftime("%b %d, %Y") %> - <%=pluralize(post.reading_time, 'min read')%>
-                          </div>
-                      </div>
+                <div class="card mt-2">
+                  <div class="card-body">
+                    <div class="col-12 mb-4 post-box">
+                        <div class="row">
+                            <div class="col-12 post-area mt-2">
+                                <h5><%= link_to post.title, post_path(post) %></h5>
+                                <span><%= post.content.truncate(250) %> <strong><%= link_to 'Read More', post_path(post) %></strong></span>
+                            </div>
+                            <div class="col-12 post-info mt-1">
+                                <%= post.created_at.in_time_zone("Istanbul").strftime("%b %d, %Y") %> - <%=pluralize(post.reading_time, 'min read')%>
+                            </div>
+                        </div>
+                    </div>
                   </div>
+                </div>
               <% end %>
           </ul>
       <% else %>
-          <p>There is no post yet.</p>
+        <div class="alert alert-primary" role="alert">
+          There is no post yet.
+        </div>
       <% end %>
-
-
-
 
     <div class="col-12 flex-header">
       <h4>Comments</h4>
@@ -82,22 +84,28 @@
       <% if @comments.any? %>
           <ul>
               <% @comments.each do |comment| %>
-                  <div class="col-12 mb-2 post-box">
-                      <div class="row">
-                          <div class="col-12 post-area mt-2">
-                              <strong><%= link_to comment.title, post_path(comment.post) %></strong> to <strong><%= link_to comment.post.title, post_path(comment.post) %></strong>
-                              <br/> 
-                              <span><%= comment.content.truncate(250) %> <strong><%= link_to 'Look Post', post_path(comment.post) %></strong></span>
-                          </div>
-                          <div class="col-12 post-info mt-1">
-                              <%= comment.created_at.in_time_zone("Istanbul").strftime("%b %d, %Y") %>
-                          </div>
-                      </div>
+                <div class="card mt-2">
+                  <div class="card-body">
+                    <div class="col-12 mb-2 post-box">
+                        <div class="row">
+                            <div class="col-12 post-area mt-2">
+                                <strong><%= link_to comment.title, post_path(comment.post) %></strong> to <strong><%= link_to comment.post.title, post_path(comment.post) %></strong>
+                                <br/> 
+                                <span><%= comment.content.truncate(250) %> <strong><%= link_to 'Look Post', post_path(comment.post) %></strong></span>
+                            </div>
+                            <div class="col-12 post-info mt-1">
+                                <%= comment.created_at.in_time_zone("Istanbul").strftime("%b %d, %Y") %>
+                            </div>
+                        </div>
+                    </div>
                   </div>
+                </div>
               <% end %>
           </ul>
       <% else %>
-          <p>There is no comments.</p>
+      <div class="alert alert-primary" role="alert">
+        This user has not any comments.
+      </div>
       <% end %>
 
     </div>

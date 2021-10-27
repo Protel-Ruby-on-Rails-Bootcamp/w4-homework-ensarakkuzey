@@ -22,9 +22,29 @@
                                                               <%= link_to '👎', vote_control_post_path(@post, :vote_type => 'Vote_Down'), method: :patch %> )
           </p>
       </div>
-      <div">
+      <div>
         <%= social_share_button_tag(@post.title) %>
       </div>
+    </div>
+
+    <div class="col-12 flex-header mt-4">
+      <h4>Comments</h4>
+      <div class="line"></div>
+    </div>
+
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <% unless @post.user == current_user %>
+            <h4>Leave a comment</h4>
+            <div id='send_comment'>
+              <%= render 'send_comment' %>
+            </div>
+            <hr/>
+          <% end %>
+          <%= render "comments", user_comments: @user_comments %>
+        </div>
+      </div>  
     </div>
 
   </div>
@@ -32,17 +52,4 @@
 
 
 
-<hr />
 
-<h1>Comments</h1>
-<p><%= render "comments", user_comments: @user_comments %></p>
-
-<% unless @post.user == current_user %>
-  <h2>Add a comment</h2>
-  <div id='send_comment'>
-    <%= render 'send_comment' %>
-  </div>
-<% end %>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>

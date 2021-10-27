@@ -2,23 +2,36 @@
     <% if @user_comments.any? %>
         <% @user_comments.each do |user_comment| %>
             <%  if user_comment.accepted != true && user_comment.expire_date >  DateTime.now %>
-                <p><strong><%= user_comment.title %></strong> - <strong><%= link_to user_comment.user.username, profile_path(user_comment.user)%></strong> - <em>Comment Status : Waiting</em>
-                <br/>
-                <%= user_comment.content %></p>
-                <hr>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= user_comment.title %></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"> <%= image_tag user_comment.user.gravatar_url, :class => "gravatar-post" %> <%= link_to user_comment.user.username, profile_path(user_comment.user)%></h6>
+                        <p class="card-text"><%= user_comment.content %></p>
+                        <hr/>
+                        <div class="alert alert-warning" role="alert">
+                            This comment's status is "Waiting"
+                        </div>
+                    </div>
+                </div> 
             <% end %>
         <% end %>
     <% end %>
 
     <% if @comments.any? %>
     <% @comments.each do |comment| %>
-        <p><strong><%= comment.title %></strong> - <strong><%= link_to comment.user.username, profile_path(comment.user)%></strong>
-
-        <br/>
-        <%= comment.content %></p>
-        <hr>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title"><%= comment.title %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"> <%= image_tag comment.user.gravatar_url, :class => "gravatar-post" %> <%= link_to comment.user.username, profile_path(comment.user)%></h6>
+                <p class="card-text"><%= comment.content %></p>
+            </div>
+        </div> 
     <% end %>
     <% else %>
-        <p>There is no comment</p>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">There is no any accepted comment.</h6>
+            </div>
+        </div> 
     <% end %>
 </div>
