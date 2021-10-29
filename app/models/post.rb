@@ -3,6 +3,7 @@ class Post < ApplicationRecord
     validates :content, presence: true
 
     belongs_to :user
+    has_many :bookmarks, dependent: :destroy
     has_many :comments, dependent: :destroy
 
     scope :availables, -> { where(visible: true) }

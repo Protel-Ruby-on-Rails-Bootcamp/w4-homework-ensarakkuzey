@@ -39,6 +39,29 @@ class PostsController < ApplicationController
     end
   end
 
+  
+  def create_bookmark 
+    @post = Post.find(params[:id])
+    Bookmark.where(post: @post, user: current_user).first_or_create
+
+    respond_to do |format|
+      format.html { redirect_to @post }
+    end
+  end
+
+  def delete_bookmark 
+    @post = Post.find(params[:id])
+    @bookmark = current_user.bookmarks.where(post: @post)
+
+    if @bookmark != nil
+      @bookmark.destroy(@bookmark.ids.first)
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @post }
+    end
+  end
+
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
     respond_to do |format|
