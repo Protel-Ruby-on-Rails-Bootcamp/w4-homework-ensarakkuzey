@@ -1,14 +1,14 @@
-<h1>Welcome viBlog</h1>
-<hr />
+<div class="col-12 flex-header">
+    <h4>Welcome viBlog</h4>
+    <div class="line"></div>
+</div>
+<div class="col-12">
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-info" role="alert">
+                You can manage your blog by <strong><%= link_to "Sign in", new_user_session_path%></strong> the system.
+            </div>
+        </div>
+    </div>
+</div>
 
-<% if user_signed_in? %>
-    <h2>HELLO!</h2>
-    <% if current_user.following.count > 0 %>
-        <p><%= link_to 'Click here', new_post_path %> to create a post or view your <%= link_to 'feed', feed_path %></p>
-    <% else %>
-
-    <% end %>
-
-<% else %>
-    <p>You can manage your blog by sign in the system.</p>
-<% end %>

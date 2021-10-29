@@ -1,7 +1,11 @@
 class WelcomeController < ApplicationController
+  before_action :check_signed_in
+
   def index
-    if current_user
-      @posts =  Post.availables.order(created_at: :desc)
-    end
   end
+
+  def check_signed_in
+    redirect_to feed_path if signed_in?
+  end
+  
 end

@@ -1,6 +1,25 @@
-<h1>Editing Post</h1>
+<div class="col-12 flex-header">
+    <h4>Edit Post</h4>
+    <div class="line"></div>
+</div>
 
-<%= render 'form', post: @post %>
+<div class="col-md-12">
+  <div class="row">
 
-<%= link_to 'Show', @post %> |
-<%= link_to 'Back', posts_path %>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <%= render 'form', post: @post %>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 mt-4">
+        <span>
+            <%= link_to 'Show', @post, class:"btn btn-success btn-radius", style: "float:right;" %>
+            <%= link_to 'Back', posts_path, class:"btn btn-success btn-radius", style: "float:right;" %>
+        </span>
+    </div>
+
+  </div>
+</div>

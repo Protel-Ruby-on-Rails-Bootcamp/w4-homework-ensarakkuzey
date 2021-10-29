@@ -17,7 +17,7 @@
                                         <%= image_tag bookmark.post.user.gravatar_url, :class => "gravatar-post" %>
                                         <strong><%= link_to bookmark.post.user.username, profile_path(bookmark.post.user)  %></strong>
                                         <br>
-                                        <span><%= bookmark.post.content.truncate(150) %></span>
+                                        <span><%= sanitize bookmark.post.content.to_s.truncate(150) %></span>
                                     </div>
                                     <div class="col-12 post-info mt-3">
                                         <%= link_to "Show", post_path(bookmark.post), class: "btn btn-success btn-radius", style: "float:right;" %>
