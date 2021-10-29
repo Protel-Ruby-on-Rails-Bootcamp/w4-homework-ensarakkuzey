@@ -1,36 +1,82 @@
-<div class="col-md-9 col-xs-12">
-    <div class="col-12 flex-header">
-      <h4>Your Feed</h4>
-      <div class="line"></div>
+<div class="row">
+    <div class="col-md-8 col-xs-12">
+        <div class="col-12 flex-header">
+        <h4>Your Feed</h4>
+        <div class="line"></div>
+        </div>
+        <% if @posts.any? %>
+            <ul>
+                <% @posts.each do |post| %>
+                    <div class="col-12 mt-4 post-box">
+                        <div class="row">
+                            <div class="col-12 user-area">
+                            <%= image_tag post.user.gravatar_url, :class => "gravatar-post" %>
+                            <strong><%= link_to post.user.username, profile_path(post.user)%></strong>
+                            </div>
+                            <div class="col-12 post-area mt-2">
+                                <h5><%= link_to post.title, post_path(post) %></h5>
+                                <span><%= post.content.truncate(250) %> <strong><%= link_to 'Read More', post_path(post) %></strong></span>
+                            </div>
+                            <div class="col-12 post-info mt-1">
+                                <%= post.created_at.in_time_zone("Istanbul").strftime("%b %d, %Y") %> - <%=pluralize(post.reading_time, 'min read')%>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                <% end %>
+            </ul>
+        <% else %>
+            <p>There is no post yet. Want to follow someone to update your feed? <%= link_to "Click Here!", profile_index_path%></p>
+        <% end %>
     </div>
-    <% if @posts.any? %>
-        <ul>
-            <% @posts.each do |post| %>
-                <div class="col-12 mt-4 post-box">
-                    <div class="row">
-                        <div class="col-12 user-area">
-                        <%= image_tag post.user.gravatar_url, :class => "gravatar-post" %>
-                        <strong><%= link_to post.user.username, profile_path(post.user)%></strong>
-                        </div>
-                        <div class="col-12 post-area mt-2">
-                            <h5><%= link_to post.title, post_path(post) %></h5>
-                            <span><%= post.content.truncate(250) %> <strong><%= link_to 'Read More', post_path(post) %></strong></span>
-                        </div>
-                        <div class="col-12 post-info mt-1">
-                            <%= post.created_at.in_time_zone("Istanbul").strftime("%b %d, %Y") %> - <%=pluralize(post.reading_time, 'min read')%>
-                        </div>
+
+
+    <div class="col-md-4 col-xs-12">
+        <div class="col-12">
+            <% if @follow_offers.any? %>
+                <div class="col-12 flex-header">
+                <h4>Who to Follow</h4>
+                <div class="line"></div>
+                </div>
+
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <% @follow_offers.each do |offer| %>
+                            <% if offer != current_user %>
+                                <%= image_tag offer.gravatar_url, :class => "gravatar-post" %>
+                                <strong><%= link_to offer.username, profile_path(offer)  %></strong>
+                                <span style="float:right;"><%= link_to "Look Profile", profile_path(offer), class: "btn btn-success btn-radius" %></span>
+                                <hr>
+                            <% end %>
+                        <% end %>
                     </div>
                 </div>
             <% end %>
-        </ul>
-    <% else %>
-        <p>There is no post yet. Want to follow someone to update your feed? <%= link_to "Click Here!", profile_index_path%></p>
-    <% end %>
+        </div>
+
+        <div class="col-12 mt-4">
+            <% if @posts.any? %>
+                <div class="col-12 flex-header">
+                <h4>Popular Posts</h4>
+                <div class="line"></div>
+                </div>
+
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <% @popular_posts.order(vote_count: :desc).take(5).each do |post| %>
+                            <%= post.title %>
+                            <br>
+
+                            <%= image_tag post.user.gravatar_url, :class => "gravatar-post" %>
+                            <strong><%= link_to post.user.username, profile_path(post.user)  %></strong>
+
+                            <span style="float:right;"><%= link_to "Show", post_path(post), class: "btn btn-success btn-radius" %></span>
+                            <hr>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+
 </div>
-
-
-<div class="col-md-3 col-xs-12">
-    
-</div>
-
-

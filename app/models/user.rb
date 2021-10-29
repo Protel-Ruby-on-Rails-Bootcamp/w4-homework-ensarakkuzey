@@ -24,6 +24,11 @@ class User < ApplicationRecord
     Post.where("user_id IN (?)", following_ids).availables
   end
 
+  def follow_offer
+    User.where("id NOT IN (?)", following_ids).order("RANDOM()").take(5)
+  end
+  
+
   def follow(other_user)
     following << other_user unless self == other_user
   end
