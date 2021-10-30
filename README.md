@@ -1,3 +1,5 @@
+Heroku : https://viblog-rails.herokuapp.com/
+
 # w4-homework
 
 Merhaba. 4. hafta odeviniz Ruby on Rails ile kucuk bir proje yapmak olacak. Projeyi Github'a koyacaksiniz ve Heroku'ya ya da istediginiz baska bir yere deploy edip bana linkini DM'den Discord'dan atacaksaniz.
